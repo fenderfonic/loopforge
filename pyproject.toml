@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "loopforge"
+version = "0.1.0"
+description = "A typed state machine for automating the issue → PR → CI → merge → close development lifecycle"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    {name = "fenderfonic"},
+]
+keywords = ["state-machine", "ci-cd", "automation", "devops", "github", "closed-loop", "pipeline"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Quality Assurance",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+dynamodb = ["boto3>=1.34"]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "build>=1.0",
+]
+all = ["loopforge[dynamodb,dev]"]
+
+[project.urls]
+Homepage = "https://github.com/fenderfonic/loopforge"
+Repository = "https://github.com/fenderfonic/loopforge"
+Issues = "https://github.com/fenderfonic/loopforge/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+loopforge = ["py.typed"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
