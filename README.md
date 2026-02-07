@@ -183,6 +183,29 @@ else:
 - **Release management** — Governed deployment workflows with transition history
 - **Custom DevOps tooling** — Any pipeline where you need to prove what happened and when
 
+## Pairs with Gatekeep
+
+[Gatekeep](https://github.com/fenderfonic/gatekeep-oss) is an AI-powered governance tool with specialized personas (security, cost, architecture). LoopForge manages the lifecycle order; Gatekeep governs the quality. Wire them together via transition hooks:
+
+```python
+from gatekeep.personas import consult_sync
+from loopforge import LoopService, LoopState
+
+def gatekeep_hook(record, previous_state, new_state, trigger):
+    """Ask Gatekeep's Sentinel to review before merging."""
+    if new_state == LoopState.MERGED:
+        verdict = consult_sync(
+            "sentinel",
+            f"Security review for PR {record.pr_url}",
+            context=f"repo={record.repo}, auto_merge={record.auto_merge}",
+        )
+        print(f"[gatekeep] Sentinel says: {verdict}")
+
+service = LoopService(repository=repo, hooks=[gatekeep_hook])
+```
+
+LoopForge tracks *what happened and when*. Gatekeep ensures *it should have happened at all*.
+
 ## Development
 
 ```bash
