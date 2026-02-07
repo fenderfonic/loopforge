@@ -5,14 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "loopforge"
 version = "0.1.0"
-description = "A typed state machine for automating the issue → PR → CI → merge → close development lifecycle"
+description = "A typed, auditable state machine for the issue → PR → CI → merge → close lifecycle. Every transition validated, timestamped, and recorded."
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11"
 authors = [
     {name = "fenderfonic"},
 ]
-keywords = ["state-machine", "ci-cd", "automation", "devops", "github", "closed-loop", "pipeline"]
+keywords = ["state-machine", "ci-cd", "automation", "devops", "audit-trail", "compliance", "github", "closed-loop", "pipeline"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
